@@ -2,12 +2,16 @@
 import * as express from "express"
 import * as bodyParser from "body-parser"
 
+import { Routes } from "./routes/vehicleRoutes"
+
 class App {
     public app: express.Application
+    public route: Routes = new Routes()
 
     constructor() {
         this.app = express()
         this.config()
+        this.route.routes(this.app)
     }
 
     private config(): void {
