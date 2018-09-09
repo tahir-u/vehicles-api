@@ -1,7 +1,11 @@
 
 import { Request, Response } from "express"
 
+import { VehicleController } from "../controllers/vehicleController"
+
 export class Routes {
+    public vehicleController: VehicleController = new VehicleController()
+
     public routes(app): void {
         app.route("/")
             .get((req: Request, res: Response) => {
@@ -12,39 +16,19 @@ export class Routes {
 
         app.route("/vehicle")
             // Get all vehicles
-            .get((req: Request, res: Response) => {
-                res.status(200).send({
-                    message: "Get request successful"
-                })
-            })
+            .get(this.vehicleController.getVehicles)
 
             // Create a new vehicle
-            .post((req: Request, res: Response) => {
-                res.status(200).send({
-                    message: "POST request successful"
-                })
-            })
+            .post(this.vehicleController.addNewVehicle)
 
         app.route("/vehicle/:id")
             // Get a single vehicle's details
-            .get((req: Request, res: Response) => {
-                res.status(200).send({
-                    message: "GET request successful"
-                })
-            })
+            .get(this.vehicleController.getVehicleWithId)
 
             // Update a single vehicle
-            .put((req: Request, res: Response) => {
-                res.status(200).send({
-                    message: "PUT request successful"
-                })
-            })
+            .put(this.vehicleController.updateVehicle)
 
             // Delete a single vehicle
-            .delete((req: Request, res: Response) => {
-                res.status(200).send({
-                    message: "DELETE request successful"
-                })
-            })
+            .delete(this.vehicleController.deleteVehicle)
     }
 }
