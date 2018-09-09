@@ -46,7 +46,7 @@ export class VehicleController {
     }
 
     public deleteVehicle(req: Request, res: Response) {
-        Vehicle.remove({ _id: req.params.id }, (error, vehicle) => {
+        Vehicle.remove({ _id: req.params.id }, (error) => {
             if (error) {
                 res.send(error)
             }
