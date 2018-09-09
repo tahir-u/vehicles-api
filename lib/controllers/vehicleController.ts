@@ -28,7 +28,7 @@ export class VehicleController {
     }
 
     public getVehicleWithId(req: Request, res: Response) {
-        Vehicle.findById(req.params.id, (error, vehicle) => {
+        Vehicle.find({ id: parseInt(req.params.id) } , (error, vehicle) => {
             if (error) {
                 res.send(error)
             }
@@ -37,7 +37,7 @@ export class VehicleController {
     }
 
     public updateVehicle(req: Request, res: Response) {
-        Vehicle.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true }, (error, vehicle) => {
+        Vehicle.findOneAndUpdate({ id: parseInt(req.params.id) }, req.body, { new: true }, (error, vehicle) => {
             if (error) {
                 res.send(error)
             }
@@ -46,7 +46,7 @@ export class VehicleController {
     }
 
     public deleteVehicle(req: Request, res: Response) {
-        Vehicle.remove({ _id: req.params.id }, (error) => {
+        Vehicle.remove({ id: parseInt(req.params.id) }, (error) => {
             if (error) {
                 res.send(error)
             }
